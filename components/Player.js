@@ -80,9 +80,15 @@ function Player() {
         <SwitchHorizontalIcon className='button' />
         <RewindIcon className='button' />
         {isPlaying ? (
-          <PauseIcon className='button w-10 h-10' onClick={handlePlayPause} />
+          <PauseIcon
+            className='button w-10 h-10 active:text-lime'
+            onClick={handlePlayPause}
+          />
         ) : (
-          <PlayIcon className='button w-10 h-10' onClick={handlePlayPause} />
+          <PlayIcon
+            className='button w-10 h-10 active:text-lime'
+            onClick={handlePlayPause}
+          />
         )}
         <FastForwardIcon className='button' />
         <ReplyIcon className='button' />
@@ -93,7 +99,7 @@ function Player() {
           onClick={() => volume > 0 && setVolume(volume - 10)}
         />
         <input
-          className='form-input w-14 md:w-28 text-lime'
+          className='form-input w-14 md:w-28'
           type='range'
           value={volume}
           onChange={(e) => setVolume(Number(e.target.value))}
