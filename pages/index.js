@@ -10,6 +10,7 @@ export default function Home() {
     <div className='h-screen overflow-hidden antialiased'>
       <Head>
         <title>MD Spotify</title>
+        <link rel='shortcut icon' href='/images/spotify.ico' />
       </Head>
       <main className='flex'>
         <Sidebar />
