@@ -2,11 +2,12 @@ import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 
 import Center from '../components/Center';
+import Player from '../components/Player';
 import Sidebar from '../components/Sidebar';
 
 export default function Home() {
   return (
-    <div className='bg-ash-500 h-screen overflow-hidden'>
+    <div className='h-screen overflow-hidden antialiased'>
       <Head>
         <title>MD Spotify</title>
       </Head>
@@ -14,6 +15,9 @@ export default function Home() {
         <Sidebar />
         <Center />
       </main>
+      <div className='sticky bottom-0'>
+        <Player />
+      </div>
     </div>
   );
 }

@@ -41,10 +41,10 @@ function Center() {
   console.log(playlist);
 
   return (
-    <div className='flex-grow h-screen overflow-y-scroll'>
+    <div className='flex-grow h-screen overflow-y-scroll scrollbar-hide'>
       <header className='absolute top-5 right-8'>
         <div
-          className='flex items-center text-acid-100 bg-ash-500 space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2'
+          className='flex items-center text-acid-100 bg-ash-500 space-x-3 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2'
           onClick={() => signOut()}
         >
           <img
@@ -57,7 +57,7 @@ function Center() {
         </div>
       </header>
       <section
-        className={`flex items-end space-x-7 bg-gradient-to-b to-ash-500 ${color} h-80 p-8`}
+        className={`flex items-end space-x-7 bg-gradient-to-b to-ash-400 ${color} h-80 p-8`}
       >
         <img className='h-44 w-44' src={playlist?.images?.[0]?.url} alt='' />
         <div className=''>
@@ -67,7 +67,7 @@ function Center() {
           </h1>
         </div>
       </section>
-      <div className=''>
+      <div className='bg-ash-400'>
         <Songs />
       </div>
     </div>

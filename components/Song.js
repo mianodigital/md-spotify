@@ -20,7 +20,7 @@ function Song({ order, track }) {
   };
   return (
     <div
-      className='grid grid-cols-2 text-coal-400 py-4 px-5 hover:bg-ash-400 rounded-lg cursor-pointer'
+      className='grid grid-cols-2 bg-ash-400 text-coal-400 py-4 px-5 hover:bg-ash-300 rounded-lg cursor-pointer'
       onClick={playSong}
     >
       <div className='flex item-center space-x-4'>
@@ -34,14 +34,16 @@ function Song({ order, track }) {
           <p className='text-acid-100 w-36 lg:w-64 truncate'>
             {track.track.name}
           </p>
-          <p className='w-40'>{track.track.artists[0].name}</p>
+          <p className='w-40 text-sm'>{track.track.artists[0].name}</p>
         </div>
       </div>
       <div className='flex item-center justify-between ml-auto md:ml-0'>
-        <p className='w-40 hidden md:inline truncate'>
+        <p className='w-40 hidden md:inline truncate text-sm'>
           {track.track.album.name}
         </p>
-        <p>{millisToMinutesAndSeconds(track.track.duration_ms)}</p>
+        <p className='text-sm'>
+          {millisToMinutesAndSeconds(track.track.duration_ms)}
+        </p>
       </div>
     </div>
   );

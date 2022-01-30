@@ -1,5 +1,5 @@
 import { LibraryIcon, SearchIcon } from '@heroicons/react/outline';
-import { CogIcon, HeartIcon, HomeIcon, PlusCircleIcon, RssIcon } from '@heroicons/react/solid';
+import { HeartIcon, HomeIcon, PlusCircleIcon, RssIcon } from '@heroicons/react/solid';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
@@ -24,12 +24,8 @@ function Sidebar() {
   }, [session, spotifyApi]);
   console.log(playlists);
   return (
-    <div className='text-coal-300 p-5 text-sm border-r border-ash-300 overflow-y-scroll h-screen scrollbar-hide lg:text-sm sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex'>
+    <div className='bg-ash-500 text-coal-300 p-5 text-sm border-r border-ash-300 overflow-y-scroll h-screen scrollbar-hide lg:text-sm sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex pb-36'>
       <div className='space-y-4'>
-        <button className='flex items-center space-x-2 hover:text-acid-100'>
-          <CogIcon className='h-5 w-5' />
-          <p>Log out</p>
-        </button>
         <button className='flex items-center space-x-2 hover:text-acid-100'>
           <HomeIcon className='h-5 w-5' />
           <p>Home</p>
