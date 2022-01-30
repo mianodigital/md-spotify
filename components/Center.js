@@ -1,7 +1,12 @@
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import { shuffle } from 'lodash';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+import { playlistIdState, playlistState } from '../atoms/playlistAtom';
+import useSpotify from '../hooks/useSpotify';
+import Songs from './Songs';
 
 const colors = [
   'from-indigo-500',
@@ -16,15 +21,32 @@ const colors = [
 function Center() {
   const { data: session } = useSession();
   const [color, setColor] = useState(null);
+  const spotifyApi = useSpotify();
+  const [playlist, setPlaylist] = useRecoilState(playlistState);
+  const playlistId = useRecoilValue(playlistIdState);
+
+  useEffect(() => {
+    spotifyApi
+      .getPlaylist(playlistId)
+      .then((data) => {
+        setPlaylist(data.body);
+      })
+      .catch((err) => console.log('Something went wrong!', err));
+  }, [spotifyApi, playlistId]);
 
   useEffect(() => {
     setColor(shuffle(colors).pop());
-  }, []);
+  }, [playlistId]);
+
+  console.log(playlist);
 
   return (
-    <div className='flex-grow text-coal-500'>
+    <div className='flex-grow h-screen overflow-y-scroll'>
       <header className='absolute top-5 right-8'>
-        <div className='flex items-center bg-ash-500 space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2'>
+        <div
+          className='flex items-center text-acid-100 bg-ash-500 space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2'
+          onClick={() => signOut()}
+        >
           <img
             src={session?.user.image}
             alt={session?.user.name}
@@ -35,10 +57,19 @@ function Center() {
         </div>
       </header>
       <section
-        className={`flex items-end space-x-7 bg-gradient-to-b to-ash-500 ${color} h-80 text-coal-500 padding-8`}
+        className={`flex items-end space-x-7 bg-gradient-to-b to-ash-500 ${color} h-80 p-8`}
       >
-        <h1>Hello</h1>
+        <img className='h-44 w-44' src={playlist?.images?.[0]?.url} alt='' />
+        <div className=''>
+          <p className='text-coal-400'>PLAYLIST</p>
+          <h1 className='text-2xl md:text-3xl xl:text-5xl font-bold text-acid-100'>
+            {playlist?.name}
+          </h1>
+        </div>
       </section>
+      <div className=''>
+        <Songs />
+      </div>
     </div>
   );
 }
